@@ -1,0 +1,17 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @this.CurrentCount</p>
+
+<button class="btn btn-primary" @onclick="this.IncrementCount">Click me</button>
+
+@code {
+
+    private int CurrentCount = 0;
+
+    private void IncrementCount() {
+        this.CurrentCount++;
+        System.Diagnostics.Debug.WriteLine("Incrementing the Counter...");
+    }
+}

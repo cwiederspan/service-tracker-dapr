@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>ServiceTracker</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+
+    <script>
+        window.mapBoxFunctions = {
+            
+            initMapBox: function () {
+                
+                mapboxgl.accessToken = 'pk.eyJ1IjoiY3dpZWRlcnNwYW4iLCJhIjoiY2s3c2FkYzFxMGRrejNlcXJ4MWViaWo1YiJ9.aLtWOo-qpFrx1z6YNhnEQw';
+                window.myMap = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v9' //,
+                    //center: [34.047, 63.779],
+                    //zoom: 4.41 
+                });
+
+                return;        
+            },
+
+            setData: function (data) {
+                window.myMap.getSource('drone').setData(data);
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <app>Loading...</app>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

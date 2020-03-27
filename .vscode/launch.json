@@ -1,0 +1,61 @@
+{
+   // Use IntelliSense to find out which attributes exist for C# debugging
+   // Use hover for the description of the existing attributes
+   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+   "version": "0.2.0",
+   "configurations": [
+        {
+            "name": "Service Tracker UI (Dapr)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "daprd-up-ui",
+            "program": "${workspaceFolder}/src/ServiceTracker.Ui/bin/Debug/netstandard2.1/ServiceTracker.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/ServiceTracker.Ui",
+            "stopAtEntry": false,
+            "env": {
+                // "ASPNETCORE_URLS": "http://+:8080",
+                // "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:8080",
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "postDebugTask": "daprd-down-ui"
+        },
+        {
+            "name": "Service Tracker UI (Web)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/ServiceTracker.Ui/bin/Debug/netstandard2.1/ServiceTracker.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/ServiceTracker.Ui",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+          "name": "Quakes API (Dapr)",
+          "type": "coreclr",
+          "request": "launch",
+          "preLaunchTask": "daprd-up-quakes",
+          "program": "${workspaceFolder}/src/Quakes.Api/bin/Debug/netcoreapp3.1/Quakes.Api.dll",
+          "args": [],
+          "cwd": "${workspaceFolder}/src/Quakes.Api",
+          "stopAtEntry": false,
+          "env": {
+              "ASPNETCORE_ENVIRONMENT": "Development",
+              "DAPR_GRPC_PORT": "50001"
+          },
+          "postDebugTask": "daprd-down-quakes"
+        }
+    ],
+    "compounds": [
+      {
+        "name": "Dapr All",
+        "configurations": [
+          "Service Tracker UI (Dapr)",
+          "Quakes API (Dapr)"
+        ],
+        "preLaunchTask": "build all"
+      }
+    ]
+}

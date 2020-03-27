@@ -1,0 +1,99 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build all",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Tracker.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build quakes",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Quakes.Api/Quakes.Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        /*{
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/Quakes.Api/Quakes.Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/src/Quakes.Api/Quakes.Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },*/
+        {
+            "type": "shell",
+            "label": "start-ui",
+            "command": "dotnet run --project src/ServiceTracker.Ui/ServiceTracker.csproj"
+        },
+        {
+            "label": "start ui",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "${workspaceFolder}/src/ServiceTracker.Ui/ServiceTracker.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ]
+        },
+        /*
+        {
+            "type": "daprd",
+            "label": "daprd-up-ui",
+            "appId": "service-tracker-ui",
+            "appPort": 8080,
+            "dependsOn": "build all",
+            "logLevel": "debug"
+        },
+        {
+            "type": "daprd-down",
+            "label": "daprd-down-ui",
+            "appId": "service-tracker-ui"
+        },
+        */
+        {
+            "type": "daprd",
+            "label": "daprd-up-quakes",
+            "appId": "quakes-api",
+            "appPort": 5000,
+            "placementAddress": "dapr_placement:50005",
+            "dependsOn": "build quakes",
+            "logLevel": "debug"
+        },
+        {
+            "type": "daprd-down",
+            "label": "daprd-down-quakes",
+            "appId": "quakes-api"
+        }
+    ]
+}

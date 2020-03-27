@@ -1,0 +1,19 @@
+﻿@page "/map"
+
+<div id='map' style='width: 800px; height: 1000px;'></div>
+
+@inject IJSRuntime JSRuntime;
+
+@code {
+
+    protected override void OnAfterRender(bool firstRender) {
+
+        var xxx = new {
+            lat = 100,
+            lng = 200
+        };
+
+        JSRuntime.InvokeVoidAsync("mapBoxFunctions.initMapBox");
+        JSRuntime.InvokeVoidAsync("mapBoxFunctions.setData", xxx);
+    }
+}
