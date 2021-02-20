@@ -1,19 +1,22 @@
 ﻿@page "/map"
 
-<div id='map' style='width: 800px; height: 1000px;'></div>
+<div id='myMap' class='container-fluid' style='position:relative; width: 100%; height: 90vh;'></div>
 
-@inject IJSRuntime JSRuntime;
+@inject IJSRuntime JSRuntime
 
 @code {
 
-    protected override void OnAfterRender(bool firstRender) {
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
 
-        var xxx = new {
-            lat = 100,
-            lng = 200
+        Console.WriteLine("Map.OnAfterRenderAsync()...");
+
+        await JSRuntime.InvokeAsync<Task>("loadMap");
+
+        var sitePin = new Pushpin() {
+            color = "green",
+            location = new Location(39.599320, -104.728870)
         };
-
-        JSRuntime.InvokeVoidAsync("mapBoxFunctions.initMapBox");
-        JSRuntime.InvokeVoidAsync("mapBoxFunctions.setData", xxx);
+        
+        await JSRuntime.InvokeAsync<Task>("addPushpin", sitePin);
     }
 }

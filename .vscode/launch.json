@@ -4,6 +4,7 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
+        /*
         {
             "name": "Service Tracker UI (Dapr)",
             "type": "coreclr",
@@ -20,17 +21,36 @@
             },
             "postDebugTask": "daprd-down-ui"
         },
+        */
         {
-            "name": "Service Tracker UI (Web)",
+            "name": "Service Tracker UI (Blazor Standalone)",
             "type": "coreclr",
             "request": "launch",
-            "program": "${workspaceFolder}/src/ServiceTracker.Ui/bin/Debug/netstandard2.1/ServiceTracker.dll",
-            "args": [],
+            "program": "dotnet",
+            "args": ["run"],
             "cwd": "${workspaceFolder}/src/ServiceTracker.Ui",
-            "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             }
+        },
+        {
+            "name": "Service Tracker UI (Edge)",
+            "type": "pwa-msedge",
+            "runtimeExecutable": "dev",
+            "request": "launch",
+            "timeout": 30000,
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}/src/ServiceTracker.Ui",
+            "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
+        },
+        {
+            "name": "Service Tracker UI (Chrome)",
+            "type": "pwa-chrome",
+            "request": "launch",
+            "timeout": 30000,
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}/src/ServiceTracker.Ui",
+            "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
         },
         {
           "name": "Quakes API (Dapr)",
